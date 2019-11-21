@@ -1,0 +1,16 @@
+define		= -DFLEXIBLE
+constraints	= none
+integrator	= nm
+nsteps		= 5000000
+nstlist         = 0
+rlist           = 0.0
+cutoff-scheme   = group
+coulombtype     = cut-off
+rcoulomb        = 0.0
+vdw-type        = cut-off
+rvdw            = 0.0
+pbc             = no
+nstype          = simple
+nstenergy	= 10
+emtol		= 0.1
+emstep		= 0.01

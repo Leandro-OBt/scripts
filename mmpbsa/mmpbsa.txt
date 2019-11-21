@@ -1,0 +1,21 @@
+# Protein groups can't have hydrogens!
+
+
+
+rec='chA'
+lig='chB'
+
+
+mkdir mmpbsa
+cd mmpbsa
+gmx make_ndx -f ../../md_non-water.1.pdb -o index.ndx
+
+../../../mmpbsa_build_files.sh ../../ ../../md_non-water.1.pdb 100 25000 100000 $rec $lig index.ndx 
+
+gmx make_ndx -f mmpbsa.pdb -o mmpbsa.ndx
+
+../../../mmpbsa.sh mmpbsa.pdb mmpbsa.pdb mmpbsa.ndx $rec $lig mmpbsa_"$rec"-"$lig" 1
+
+
+
+
