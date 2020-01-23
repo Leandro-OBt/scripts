@@ -2,10 +2,10 @@
 
 grp="OW"
 input_filename_prefix="frame_""$grp"
-output_filename_prefix="water-density"
+output_filename_prefix="water-density_K"
 
-flag_frames_pdb=0
-flag_franes_dat=0
+flag_frames_pdb=1
+flag_franes_dat=1
 flag_dg=1
 
 if [ $flag_frames_pdb -eq 1 ]; then
@@ -36,7 +36,7 @@ fi
 if [ $flag_dg -eq 1 ]; then
 	total_atm=$(wc -l "$input_filename_prefix""_1.dat" | awk '{print $1}')
 	total_frame=$(find . -name "$input_filename_prefix""_*.dat" | wc -l | awk '{print $1}')
-	~/solv "$input_filename_prefix" $total_atm $total_frame "$output_filename_prefix"
+	/home/leandro/repos/scripts/analyze_md/water_density/solv "$input_filename_prefix" $total_atm $total_frame "$output_filename_prefix"
 fi
 
 

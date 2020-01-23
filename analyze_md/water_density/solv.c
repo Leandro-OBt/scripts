@@ -121,8 +121,10 @@ int main(int argc, const char * argv[]){
 				
 				occ[a][b][c] /= total_frames ; // Occupancy of OW atoms in each box element
 				
-				occ_avg += occ[a][b][c] ;
-				n_box_elements++ ;
+				if( occ[a][b][c] > 0.0 ){
+					occ_avg += occ[a][b][c] ;
+					n_box_elements++ ;
+				}
 				
 			}
 		}
@@ -165,13 +167,21 @@ int main(int argc, const char * argv[]){
 				
 				if( occ[ x_num ][ y_num ][ z_num ] > 0.000 ){
 					
-					K = occ[ x_num ][ y_num ][ z_num ] / occ_avg;
+					K = occ[ x_num ][ y_num ][ z_num ] / bulk_occ;
 					
-					dG = (-1)*R*T*log(K) ;
 					
-					if( abs(dG) >= 0.6 ){
-						fprintf( output , "ATOM %6d  OW  SOL%6d    %8.3f%8.3f%8.3f  1.00%6.3f\n", n, n , x_avg, y_avg, z_avg , dG ) ;
-					}
+//					if( abs(dG) >= 0.6 ){
+//					if( K > 2.0 ){
+						
+//					dG = (-1)*R*T*log(K) ;
+						
+//					printf("%f\t%f\t%f\t%f\t%f\n", occ[ x_num ][ y_num ][ z_num ],occ_avg,bulk_occ,K,dG);
+						
+						
+						
+//						fprintf( output , "ATOM %6d  OW  SOL%6d    %8.3f%8.3f%8.3f  1.00%6.3f\n", n, n , x_avg, y_avg, z_avg , dG ) ;
+					fprintf( output , "ATOM %6d  OW  SOL%6d    %8.3f%8.3f%8.3f  1.00%6.3f\n", n, n , x_avg, y_avg, z_avg , K ) ;
+//					}
 					
 					//n++;
 				}
